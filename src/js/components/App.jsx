@@ -1,10 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { func, shape, arrayOf, string, bool, any } from 'prop-types';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  withRouter
+} from 'react-router-dom';
 import * as actions from '../actions';
 import Dashboard from './Dashboard/Dashboard';
 import Home from './Dashboard/Home';
+import Form from './Form';
+import Students from './Students';
+import { isValidToken } from '../utils';
 
 export class App extends React.Component {
   static propTypes = {
@@ -20,30 +29,48 @@ export class App extends React.Component {
     error: null
   };
 
+  state = {
+    isAuthenticated: false
+  };
+
   componentDidMount() {
     const { fetchData } = this.props;
     fetchData();
+    const token = localStorage.getItem('token');
+    console.log('token', token);
+
+    if (isValidToken()) {
+      console.log('token');
+      this.setState({ isAuthenticated: true });
+    } else {
+      this.props.history.push('/form');
+    }
   }
 
   render() {
+    console.log('props are', this.props);
     const { data, isLoading, error } = this.props;
+    const { isAuthenticated } = this.state;
 
     return (
-      <Router>
-        <div className="app">
-          {`data retreived is ${JSON.stringify(data)}, ${isLoading}, ${error &&
-            error.message}`}
-          <br />
-          <Link style={{ margin: '20px' }} to="/dashboard">
-            Go to Dashboard
-          </Link>
-          <Link to="/dashboard/profile">Go to Profile</Link>
+      <div className="app">
+        {`data retreived is ${JSON.stringify(data)}, ${isLoading}, ${error &&
+          error.message}`}
+        <br />
+        <Link style={{ margin: '20px' }} to="/dashboard">
+          Go to Dashboard
+        </Link>
+        {isAuthenticated && <Link to="/dashboard/profile">Go to Profile</Link>}
+        <Link to="/form">Go to Form</Link>
+        <br />
+        {isAuthenticated && <Link to="/students">Students</Link>}
 
-          <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-          </Switch>
-        </div>
-      </Router>
+        <Switch>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/form" component={Form} />
+          <Route path="/students" component={Students} />
+        </Switch>
+      </div>
     );
   }
 }
@@ -56,4 +83,6 @@ function mapStateToProps({ data }) {
   };
 }
 
-export default connect(mapStateToProps, { fetchData: actions.fetchData })(App);
+export default withRouter(
+  connect(mapStateToProps, { fetchData: actions.fetchData })(App)
+);

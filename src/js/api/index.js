@@ -22,6 +22,30 @@ export async function youtube(query) {
   return res.data;
 }
 
+export async function postForm(formData) {
+  try {
+    console.log('in form api', formData);
+    const response = await axios.post('/student', formData);
+    return response;
+  } catch (e) {
+    console.log('error is ', e);
+  }
+}
+
+export async function getStudents() {
+  let token = localStorage.getItem('token');
+  try {
+    const response = await axios.get('/getStudents', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (e) {
+    console.log('error is ', e);
+  }
+}
+
 // export function studentHrData() {
 //   const data = [
 //     {

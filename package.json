@@ -4,12 +4,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
+    "dev:node": "webpack --config webpack.config.dev.js",
     "prod": "webpack --config webpack.config.prod.js -p",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "prod:watch": "webpack --config webpack.config.prod.js -w",
-    "dev:node":"webpack --config webpack.config.dev.js",
-    "start":"nodemon server/index.js"
+    "start": "nodemon server/index.js"
   },
   "jest": {
     "snapshotSerializers": [
@@ -22,10 +22,16 @@
   "description": "React Project",
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "jwt-decode": "^2.2.0",
+    "mongoose": "^5.1.1",
     "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
