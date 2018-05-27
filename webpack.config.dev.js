@@ -26,9 +26,9 @@ module.exports = {
               ]
             }
           },
-          /* {
+          {
             loader: 'eslint-loader'
-          } */
+          }
         ]
       },
       {
@@ -45,9 +45,9 @@ module.exports = {
               ]
             }
           },
-          /* {
+          {
             loader: 'eslint-loader'
-          } */
+          }
         ]
       },
       {
