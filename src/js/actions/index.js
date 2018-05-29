@@ -36,3 +36,29 @@ export function saveForm(formData) {
   };
 }
 
+export function fetchStudents() {
+  return {
+    type: types.FETCH_STUDENTS
+  };
+}
+
+export function fetchStudentsAttempt() {
+  return {
+    type: types.FETCH_STUDENTS_ATTEMPT
+  };
+}
+
+export function fetchStudentsSuccess(data) {
+  return {
+    type: types.FETCH_STUDENTS_SUCCESS,
+    payload: data
+  };
+}
+
+export function fetchStudentsFail(error) {
+  return {
+    type: types.FETCH_STUDENTS_FAIL,
+    payload: error
+  };
+}
+

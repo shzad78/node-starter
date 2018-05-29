@@ -32,6 +32,20 @@ export async function postForm(formData) {
   }
 }
 
+export async function getStudents() {
+  let token = localStorage.getItem('token');
+  try {
+    const response = await axios.get('/getStudents', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (e) {
+    console.log('error is ', e);
+  }
+}
+
 // export function studentHrData() {
 //   const data = [
 //     {

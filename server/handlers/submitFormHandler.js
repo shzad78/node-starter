@@ -31,10 +31,11 @@ module.exports = function(req, res, next) {
     // payload should be an object
     const payload = { id: user.id };
     var token = jwt.sign(payload, jwtOptions.secretOrKey, {
-      expiresIn: 1 * 60 * 60
+      expiresIn: 10
     });
     res.status(201).send({ id: user.id, token });
   } else {
+    console.log('some problem in get Students');
     res.sendStatus(401);
   }
 };

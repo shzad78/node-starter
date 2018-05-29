@@ -19,6 +19,7 @@ module.exports = function() {
   // When a request comes into the API with passport middleware
   // then below is how passport resolves it.
   var strategy = new Strategy(jwtOptions, function(jwt_payload, next) {
+    console.log('this is the jwt_payload',jwt_payload)
     var user = users.filter(user => {
       return user.id === jwt_payload.id;
     })[0];

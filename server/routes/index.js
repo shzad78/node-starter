@@ -19,4 +19,5 @@ module.exports = app => {
   // Fallback routes
 
   app.get('/form', fallbackHandler);
+  app.get('/students', fallbackHandler);
 };
