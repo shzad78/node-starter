@@ -35,7 +35,6 @@ module.exports = function(req, res, next) {
     });
     res.status(201).send({ id: user.id, token });
   } else {
-    console.log('some problem in get Students');
     res.sendStatus(401);
   }
 };

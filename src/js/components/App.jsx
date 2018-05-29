@@ -14,6 +14,7 @@ import Home from './Dashboard/Home';
 import Form from './Form';
 import Students from './Students';
 import { isValidToken } from '../utils';
+import axios from 'axios';
 
 export class App extends React.Component {
   static propTypes = {
@@ -45,6 +46,14 @@ export class App extends React.Component {
     } else {
       this.props.history.push('/form');
     }
+    const testData = {
+      name: 'foods',
+      imgUrl: 'http://www.estore.com/img/img1.jpg',
+      subCategorys: ['dry fruit', 'hot food']
+    };
+    axios.post('/category', testData).then(category => {
+      console.log('created category is ', category);
+    });
   }
 
   render() {
