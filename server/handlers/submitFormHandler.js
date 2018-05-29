@@ -31,7 +31,7 @@ module.exports = function(req, res, next) {
     // payload should be an object
     const payload = { id: user.id };
     var token = jwt.sign(payload, jwtOptions.secretOrKey, {
-      expiresIn: 10
+      expiresIn: 1 * 60 * 60
     });
     res.status(201).send({ id: user.id, token });
   } else {
